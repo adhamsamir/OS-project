@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package contfileall;
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -11,25 +13,27 @@ import java.util.concurrent.ThreadLocalRandom;
  *
  * @author Adam
  */
-public class ContFileAll {
+public class ContFileAll 
+{
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException 
+    {
        // TODO code application logic here
         System.out.println("--------------File Allocation Simulator--------------");
-        System.out.println("Press 1 for contiguous file allocation, Press 2 for Linked file allocation");
+        System.out.println("Press 1 for contiguous file allocation, Press 2 for Linked file allocation, Press 3 for Indexed file allocation");
         Scanner sc=new Scanner(System.in);
         int in=sc.nextInt();
         System.out.println("Enter Size of Disk");
         Simulator s=new Simulator();
        s.dspace=sc.nextInt();
+               s.ref=new String[s.dspace];
+
        s.disk=new int[s.dspace];
-
+       
       String name;
-
-
 
   
         System.out.println("Size of disk="+s.dspace);
@@ -37,10 +41,10 @@ public class ContFileAll {
                       s.nfiles=sc.nextInt();
              
       
-              File a[]=new File[s.nfiles];
-     s.emp();
+              TheFile a[]=new TheFile[s.nfiles];
+              s.emp();
               for(int i=0;i<s.nfiles;i++){
-                  a[i]=new File();
+                  a[i]=new TheFile();
                      System.out.println("Enter file name");
                      
                         
@@ -74,33 +78,51 @@ public class ContFileAll {
 //               
                 }
      if(in==2){
+                         s.Lallocate(name);
+        
                    a[i].name=name;
                               a[i].len=s.len1;
                               a[i].start=s.st;
                               a[i].end=s.last;
-                s.Lallocate();
      }
-              }
-              for(int i=0;i<s.nfiles;i++){
-                  System.out.print("Name: "+a[i].name+"      ");
-                                    System.out.print("Size: "+a[i].len+"      ");
-                                                     System.out.print("Starting block "+a[i].start+"      ");
-                                                                       System.out.print("Ending block "+a[i].end+"      \n");
-
-
-
-                  
-              }
-             
-//for(int i=0;i<s.dspace;i++){
-//if(s.disk[i]==-1){
-//System.out.println("Block number "+i+"is not occupied\n");
-//}
-//else
-//System.out.println("Block number "+i+"is occupied by file \n");
-//}
+     if(in==3){
+                         s.Indallocate(name);
+        
+                   a[i].name=name;
+                              a[i].len=s.len1;
+                              a[i].start=s.st;
+                              a[i].end=s.last;
+     }
        
+              }
+       ;
 
+              for(int i=0;i<s.nfiles;i++)
+              {
+                  System.out.print("Name: "+a[i].name+"      ");
+                  System.out.print("Size: "+a[i].len+"      ");
+                   System.out.print("Starting block "+a[i].start+"      ");
+                  System.out.print("Ending block "+a[i].end+"      \n");
+                  
+     
+
+              }
+              
+              if (in==3){
+             for(int j=0;j<s.nfiles;j++)
+                  {
+                   
+              }            
+              }
+                      
+             if (in==2)
+              {
+              for(int j=0;j<s.nfiles;j++)
+                  {
+                   
+         s.poin(a[j].name);
+              }
+              }
 
 }
          
