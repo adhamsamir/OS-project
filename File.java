@@ -10,11 +10,14 @@ package contfileall;
  * @author Adam
  */
 
-    public class File 
+    public class TheFile 
 {
        public String name;
        public int start;
        public int len;
        public int end;
+
+    TheFile() {
+    }
        
 }
